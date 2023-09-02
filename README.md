@@ -14,14 +14,14 @@ To clone and use this middleware in your project, follow these steps:
    git clone https://github.com/vipinkumar66/Django-middleware.git
    ```
 
-##Install dependencies
+## Install dependencies
 
    ```bash
    pip install -r requirements.txt
    ```
 The secret key in the settings.py file is set in the .env file so create one for your project and setup properly.
 
-###License
+### License
 
 This combined README.md provides a concise description of the project, along with the clone command and instructions for installing dependencies and configuring the secret key in a single section.
 
