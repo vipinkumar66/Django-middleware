@@ -1,0 +1,73 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<!-- Include Chart.js CSS and JavaScript -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.1/Chart.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Get the 2D rendering context for the canvas element with ID 'myChart'
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+  // Extract chart data from the 'stat_data' variable in JSON format
+  const chartData = {{ stat_data | safe }};
+
+  // Initialize an array to store chart data values
+  let arr = []
+
+  // Iterate through the values of the first (and presumably only) dictionary in 'chartData'
+  for (let value of Object.values(chartData[0])) {
+    arr.push(value);
+  }
+
+  // Render the chart using Chart.js
+  const chart = new Chart(ctx, {
+    type: 'bar',  // Specify the chart type (e.g., bar chart)
+    data: {
+      // Specify chart labels and datasets
+      labels: ['Windows', 'Mac', 'Iphone', 'Android', 'Other'],
+      datasets: [{
+        label: 'Visits',  // Label for the dataset
+        data: arr,  // Chart data values
+        backgroundColor: [
+          // Specify background colors for bars
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(54, 162, 178, 0.2)',
+          'rgba(54, 162, 300, 0.2)',
+          'rgba(54, 162, 200, 0.2)'
+        ],
+        borderColor: [
+          // Specify border colors for bars
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(54, 162, 178, 1)',
+          'rgba(54, 162, 300, 1)',
+          'rgba(54, 162, 200, 1)'
+        ],
+        borderWidth: 2  // Border width for bars
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true  // Start the Y-axis from zero
+          }
+        }]
+      }
+    },
+  });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<div style="width: 100%;">
+  <!-- Create a canvas element for rendering the chart -->
+  <canvas style="margin-bottom: 30px; width: 60%; height: 50%;" id="myChart"></canvas>
+</div>
+{{ block.super }}
+{% endblock %}
