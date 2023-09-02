@@ -11,5 +11,9 @@ To clone and use this middleware in your project, follow these steps:
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone <repository_url>
-# Django-middleware
+   git clone https://github.com/vipinkumar66/Django-middleware.git
+
+   ```bash
+   pip install -r requirements.txt
+
+   
